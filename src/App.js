@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import Input from './Inputs/Input.js';
+import Moa from './MOA/MOA';
+import Mil from './Mil/Mil';
 import logo from './logo.png';
 import './App.css';
 
+
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -14,7 +17,7 @@ class App extends Component {
           </p>
         </header>
         <div className="Body">
-          <Input />
+          <Moa />
         </div>
         
       </div>
