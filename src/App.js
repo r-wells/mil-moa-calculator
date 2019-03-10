@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Moa from './Yards/Yards';
-import Mil from './Mil/Mil';
+import Yards from './Yards/Yards';
+import Meters from './Meters/Meters';
 import logo from './logo.png';
 import './App.css';
 
@@ -15,14 +15,12 @@ class App extends Component {
       this.setState(
           {units: 'yards'}
       )
-      console.log(this.state.units);
   }
 
   metersHandler = (event) => {
       this.setState(
           {units: 'meters'}
       )
-      console.log(this.state.units);
   }
 
   render() {
@@ -42,12 +40,15 @@ class App extends Component {
                 <input type="radio" name="units-selection" onChange={this.metersHandler} value="Meters" />Meters
             </form>
           </div>
-          <Moa units={this.state.units} />
-          <Mil />
+          <div>
+            {this.state.units === 'yards'? <Yards />: null}
+            {this.state.units === 'meters'? <Meters />: null}
+          </div>
         </div>
         
       </div>
     );
+
 
   }
 }
