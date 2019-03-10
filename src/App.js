@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Moa from './MOA/MOA';
+import Moa from './Yards/Yards';
 import Mil from './Mil/Mil';
 import logo from './logo.png';
 import './App.css';
@@ -7,7 +7,26 @@ import './App.css';
 
 class App extends Component {
 
+  state = {
+    units: ''
+    }
+
+  yardsHandler = (event) => {
+      this.setState(
+          {units: 'yards'}
+      )
+      console.log(this.state.units);
+  }
+
+  metersHandler = (event) => {
+      this.setState(
+          {units: 'meters'}
+      )
+      console.log(this.state.units);
+  }
+
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
@@ -17,11 +36,19 @@ class App extends Component {
           </p>
         </header>
         <div className="Body">
-          <Moa />
+          <div className="Input">
+            <form>
+                <input type="radio" name="units-selection" onChange={this.yardsHandler} value="Yards" />Yards 
+                <input type="radio" name="units-selection" onChange={this.metersHandler} value="Meters" />Meters
+            </form>
+          </div>
+          <Moa units={this.state.units} />
+          <Mil />
         </div>
         
       </div>
     );
+
   }
 }
 
