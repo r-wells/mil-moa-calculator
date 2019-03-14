@@ -7,9 +7,9 @@ import './Yards.css';
 class Yards extends Component {
 
     state ={
-        mils: 0,
         moa: 0,
-        distance: 0
+        distance: 0,
+        mils: 0
     }
 
     calculateMoaHandler = (event) => {
@@ -22,17 +22,17 @@ class Yards extends Component {
 
     calculateDistanceHandler = (event) => {
         this.setState({
-            distance: event.target.value * 95.5109838,
             moa: event.target.value,
+            distance: event.target.value * 95.5109838,
             mils: event.target.value * 3.438
         })
     }
 
     calculateMilsToMoaHandler = (event) => {
         this.setState({
-            mils: event.target.value,
             moa: event.target.value / 3.438,
-            distance: ( (event.target.value * 1000) / 12)  / 3
+            distance: ( (event.target.value * 1000) / 12)  / 3,
+            mils: event.target.value
         })
     }
 
@@ -58,8 +58,8 @@ class Yards extends Component {
                 </div>
             </div>
             <div className="col-2">
-                <p>1 MOA (Inches): {this.state.moa}</p>
                 <p>Distance To Target (Yards): {this.state.distance}</p>
+                <p>1 MOA (Inches): {this.state.moa}</p>
                 <p>1 Mils (Inches): {this.state.mils}</p>
             </div>
         </div>
