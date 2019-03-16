@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "deploying": "blue-line-optics-apps",
+    "default": "blue-line-optics-apps"
+  }
+}

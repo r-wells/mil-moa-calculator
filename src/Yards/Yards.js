@@ -1,74 +1,51 @@
-import React, { Component } from 'react';
-// import Distance from './Distance/Distance';
-// import MilToMoa from './MilToMoa/MilToMoa';
-// import TargetSize from'./TargetSize/TargetSize';
+import React from 'react';
 import './Yards.css';
 
-class Yards extends Component {
+const yards = (props) =>  {
 
-    state ={
-        moa: 0,
-        distance: 0,
-        mils: 0
-    }
+    //Distance in meters
+    let meters = Number((props.distance * 0.9144).toFixed(3))
 
-    calculateMoaHandler = (event) => {
-        this.setState({
-            moa: (event.target.value / 100) * 1.047,
-            distance: event.target.value,
-            mils: this.state.moa * 3.438
-        })
-    }
+    //Find moa & mil in Inches and round to 3 digits first
+    //moai = moa (inches) -- mili = mil (Inches) etc.. 
+    let moai = Number((props.moa).toFixed(3));
+    let mili = Number((props.mil).toFixed(3));
+    let moac = Number((moai * 2.54).toFixed(3));
+    let milc = Number((mili * 2.54).toFixed(3));
 
-    calculateDistanceHandler = (event) => {
-        this.setState({
-            moa: event.target.value,
-            distance: event.target.value * 95.5109838,
-            mils: event.target.value * 3.438
-        })
-    }
+    
+    //Find click values, round to nearest 10
+    // moaclicki = moa click value (inches) etc...
+    let moaclicki = Number((moai / 4 ).toFixed(3));
+    let milclicki = Number((mili / 10).toFixed(3));
+    let moaclickc = Number((moac / 4 ).toFixed(3));
+    let milclickc = Number((milc / 10).toFixed(3));
 
-    calculateMilsToMoaHandler = (event) => {
-        this.setState({
-            moa: event.target.value / 3.438,
-            distance: ( (event.target.value * 1000) / 12)  / 3,
-            mils: event.target.value
-        })
-    }
-
-    render() {
-    //MOA Rendering
     return(
         <div className="row">
+            <div><p className="distanceText">Distance To Target (Yards): {props.distance}</p></div>
+            <div><p className="distanceText">Distance To Target (Meters): {meters}</p></div>
             <div className="col-2">
-                <div className="distanceContainer">
-                    <h3>Calculate MOA</h3>
-                    <p>Insert Distance To Target</p>
-                    <input onChange={this.calculateMoaHandler} value={this.state.distance} />
-                </div>
-                <div className="milsContainer">
-                    <h3>Calculate Distance</h3>
-                    <p>Insert 1 MOA in inches</p>
-                    <input onChange={this.calculateDistanceHandler} value={this.state.moa} />
-                </div>
-                <div className="milsContainer">
-                    <h3>Calculate Mils</h3>
-                    <p>Insert 1 Mils in inches</p>
-                    <input onChange={this.calculateMilsToMoaHandler} value={this.state.mils} />
+                <div className="border-raised">
+                    <p><strong>Base Values</strong></p>
+                    <p>1 MOA (Inches): {moai}</p>
+                    <p>1 Mils (Inches): {mili}</p>
+                    <p>1 MOA (Centimeters): {moac}</p>
+                    <p>1 Mils (Centimeters): {milc}</p>
                 </div>
             </div>
             <div className="col-2">
-                <p>Distance To Target (Yards): {this.state.distance}</p>
-                <p>1 MOA (Inches): {this.state.moa}</p>
-                <p>1 Mils (Inches): {this.state.mils}</p>
+                <div className="border-raised">
+                    <p><strong>Click Values</strong></p>
+                    <p>1/4 MOA (Inches): {moaclicki}</p>
+                    <p>0.1 Mils (Inches): {milclicki}</p>
+                    <p>1/4 MOA (Centimeters): {moaclickc}</p>
+                    <p>0.1 Mils (Centimeters): {milclickc}</p>
+                </div>
             </div>
         </div>
     )
 
-    //Mils rendering
-
-}
-
 };
 
-export default Yards;
+export default yards;
